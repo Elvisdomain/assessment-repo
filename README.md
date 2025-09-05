@@ -43,10 +43,12 @@ Steps:
 
 •	Verify Quality Gate status (build fails if it doesn’t pass).
 
+
 2.  Synk Code Vulnerability Scan
 •	Ensures deployment only happens if Snyk passes.
 •	Used snyk/actions/maven (best for Maven-based projects).
 •	Enforced high severity threshold (--severity-threshold=high) → pipeline fails on high/critical       vulnerabilities.
+
 
 3. ECR Deployment (Container Build & Push)
 Triggered only on push events to develop.
@@ -55,6 +57,7 @@ Steps:
 •	Create Docker images with Git commit hash as tag
 •	Authenticate with Amazon ECR
 •	Push images to their respective repositories
+
 
 🔑 Key Features
 •	Matrix builds → Each service (account-service, audit-service, payment-service) builds/tested independently.
@@ -68,10 +71,12 @@ Steps:
 •	payment-service build runs only after account-service and audit-service are green ✅ 
 
 
+
 ✅ Dependency Management
 •	Account and audit must finish before payment.
 
 •	Payment-depends waits on both. This way, payment-service builds only after account-service and audit-service artifacts are built.
+
 
 👉 This setup ensures:
 •	Independent builds of each service.
